@@ -13,7 +13,7 @@ The patterns are divided into four key sections:
  - Circular Patterns - Concentric circle patterns
  - Axis/Kaleidoscopic Patterns - Patterns that build upwards, then repeated kaleidoscopic-style using "Shu" to control the number of axis. 
 
-I am not a developer or coder so there is a lot of things to correct, but I have tried to create something which demostrates some complex geometric elements that can be manipulated with one or two number changes. I have learned a lot from people sharing information so I thought it would be appropriate to share what I have learned in return.
+I am not a developer or coder so there are a lot of things to correct and standardise, but I have tried to create something which demostrates some complex geometric elements that can be manipulated with one or two number changes. I am not a mathematician (terrible at it infact) either so there are a few things that can be improved there too. I have learned a lot from people sharing information so I thought it would be appropriate to share what I have learned in return.
 
 There will be more functions developed over time.
 
