@@ -6,6 +6,8 @@ The functions are all named after Eygptian Gods and Deities. I have designed the
 
 Each function starts with a simple 0/1 on-off command. 
 
+I will start to export out each pattern as it's own PY file, and these will be described in the Wiki, but they are all available within the HORUS.PY file - which is how I use them as I combine them together to make random patterns.
+
 The patterns are divided into four key sections:
 
  - Geometric Tiled Patterns
