@@ -11,22 +11,63 @@ wn.screensize(10000, 10000)
 
 ### SCREENSHOT COMMAND ON 'A' KEYBOARD PRESS ###
 
-def halo():
+def ihy():
     ts = osiris.getscreen()
     osiris.hideturtle()
     ts.getcanvas().postscript(file="horus - " +
                               strftime("%Y-%m-%d %H-%M-%S") +
-                              ".eps", width=10000, height=10000)
+                              ".eps", width=5000, height=5000)
     osiris.showturtle()
-turtle.onkey(halo,"a")
+turtle.onkey(ihy,"a")
+turtle.listen()
+
+### CENTRE DOT COMMAND ON 'D' KEYBOARD PRESS ###
+
+def yam():
+    osiris.penup()
+    osiris.goto(0,0)
+    osiris.dot(3,'#0000FF')
+    
+turtle.onkey(yam,"d")
 turtle.listen()
 
 ### MATH DEFINITIONS ###
 
-def pathag(sidea, sideb):
+def pythag(sidea, sideb):
     csquare = (sidea ** 2) + (sideb ** 2)
     sidec = math.sqrt(csquare)
     return sidec
+
+def eq_triangle_height(side):
+    eqheight = (math.sqrt(3)/2)* side
+    return eqheight
+
+def work_sin(sin_length,sin_angle):
+    sin_number = ((math.sin(math.radians(sin_angle)))*sin_length)
+    return sin_number
+
+def work_cos(cos_length,cos_angle):
+    cos_number = ((math.cos(math.radians(cos_angle)))*cos_length)
+    return cos_number
+
+def work_tan(work_tan_a,work_tan_b):
+    work_tan_angle = (work_tan_a / work_tan_b)
+    work_tan_number = (math.degrees(math.atan(work_tan_angle)))
+    return work_tan_number  
+    
+def work_tan_opp(tan_opp_length,tan_opp_angle):
+    tan_opp_number = ((math.tan(math.radians(tan_opp_angle)))*tan_opp_length)
+    return tan_opp_number        
+
+def work_sin_opp(sin_opp_angle_adj,sin_opp_angle_opp,sin_opp_length):
+    sin_opp_a = (math.sin(math.radians(sin_opp_angle_adj)))
+    sin_opp_b = sin_opp_length / sin_opp_a
+    sin_opp_c = sin_opp_b * (math.sin(math.radians(sin_opp_angle_opp)))
+    return sin_opp_c  
+
+def work_acos(A,B,C):
+    X = math.degrees(math.acos((C * C + A * A - B * B)/(2.0 * C * A))) # bottom angle
+    return X
 
 '''
 #############################################################
@@ -141,7 +182,7 @@ def amunet(amunet_y,amunet_start,amunet_size,
 ### Sky god and god of war          ###
 #######################################
 ### Developed using
-### 1,50,6,100,15,5,'#FF4444'
+### 1,50,6,100,15,135,5,'#FF4444'
 
 def anhur(anhur_y,anhur_start,anhur_no,
           anhur_size,anhur_spacing,
@@ -162,7 +203,8 @@ def anhur(anhur_y,anhur_start,anhur_no,
             osiris.right(135)
             osiris.pendown()
             osiris.pensize(2)
-            anhur_calsize = (anhur_size) - ((anhur_size/anhur_no) * anhur_c)
+            anhur_calsize = ((anhur_size) -
+                             ((anhur_size/anhur_no) * anhur_c))
             osiris.forward(anhur_calsize)
             osiris.backward(anhur_calsize)
             osiris.right(90)
@@ -361,7 +403,7 @@ def apep(apep_y,apep_size,apep_square_y_n,
                 osiris.forward(apep_size)
         ## GET INTO POSITION FOR THE QUADS
         apep_short = ((apep_size / apep_quads)/2)
-        apep_long = pathag(apep_short,apep_short)
+        apep_long = pythag(apep_short,apep_short)
         osiris.goto((osirisCurrentX-(apep_size/2)),
                     (osirisCurrentY+(apep_size/2)))
         osiris.setheading(90)
@@ -589,7 +631,7 @@ def bennu(bennu_y,bennu_size,bennu_square_y_n,
         ## GET INTO POSITION FOR THE INNER TRIANGLES
         osiris.penup()
         bennu_short = ((bennu_size / bennu_quads)/2)
-        bennu_long = pathag(bennu_short,bennu_short)
+        bennu_long = pythag(bennu_short,bennu_short)
         osiris.goto ((osirisCurrentX-(bennu_size/2))
                      ,(osirisCurrentY+(bennu_size/2)))
         osiris.setheading(90)
@@ -880,7 +922,249 @@ def hedetet(hedetet_y,hedetet_start,hedetet_no,hedetet_size,
         osiris.setheading(osirisHeadingStart)
         osiris.penup()
 
+####################################
+### Hef = Random Squares         ###
+### Personification of infinity  ###
+####################################
+### Developed using
+### hef_y=1,hef_no=10,hef_angle_a=0,hef_angle_b=360,
+### hef_forward_a=0,hef_forward_b=300,hef_length_a=50,
+### hef_length_b=300,hef_pensize=6,hef_pencolor='#FFFFFF',
+### hef_fillcolor='#00FF00'
 
+def hef(hef_y=1,hef_no=10,hef_angle_a=0,hef_angle_b=360,
+        hef_forward_a=0,hef_forward_b=300,hef_length_a=50,
+        hef_length_b=300,hef_pensize=6,hef_pencolor='#FFFFFF',
+        hef_fillcolor='#00FF00'):
+    if hef_y == 1:
+        for hef_a in range(1,(hef_no+1)):
+            osiris.goto(0,0)
+            osiris.pensize(hef_pensize)
+            osiris.pencolor(hef_pencolor)
+            osiris.fillcolor(hef_fillcolor)
+            osiris.setheading(osirisHeadingStart)
+            osiris.left(randint(hef_angle_a,hef_angle_b))
+            osiris.forward(randint(hef_forward_a,hef_forward_b))
+            osiris.setheading(osirisHeadingStart)
+            hef_length = (randint(hef_length_a,hef_length_b))
+            osiris.begin_fill()
+            osiris.pendown()
+            for hef_b in range(1,5):
+                osiris.forward(hef_length)
+                osiris.right(90)
+            osiris.end_fill()
+            osiris.penup()
+
+########################################################################
+### Imhotep = Islamic-based tile, with zig zags and downward columns ###
+### Architect, engineer, scribe                                      ###
+########################################################################
+### Developed using
+###imhotep_y = 1,imhotep_width = 400,imhotep_height = 400,
+###imhotep_spike_no = 1,imhotep_row_no = 2,
+###imhotep_row_margin_percent = 10,imhotep_middle_buffer_percent=10,
+###imhotep_row_buffer = 10, imhotep_downward_length=75,
+###imhotep_downward_no=1, imhotep_downward_cols=1,
+###imhotep_row_pensize = 2, imhotep_row_color = '#FF3300',
+###imhotep_downward_pensize = 2, imhotep_downward_color = '#0033FF',
+###imhotep_bounding_pensize = 2, imhotep_bounding_color = '#00FF33',
+###imhotep_write_output=1):
+
+def imhotep(imhotep_y = 1,imhotep_width = 400,imhotep_height = 400,
+            imhotep_spike_no = 1,imhotep_row_no = 2,
+            imhotep_row_margin_percent = 10,imhotep_middle_buffer_percent=10,
+            imhotep_row_buffer = 10, imhotep_downward_length=75,
+            imhotep_downward_no=1, imhotep_downward_cols=1,
+            imhotep_row_pensize = 2, imhotep_row_color = '#FF3300',
+            imhotep_downward_pensize = 2, imhotep_downward_color = '#0033FF',
+            imhotep_bounding_pensize = 2, imhotep_bounding_color = '#00FF33',
+            imhotep_write_output=1):
+    if imhotep_y == 1:
+        if (imhotep_downward_no*imhotep_downward_length) <= (imhotep_height):
+            ### We need to work out the angles and lengths involved
+            ### Essentially, we're building out a series of triangles
+            ### So we need pythag and acos
+
+            ### ~~~~~~~ ROW LOGIC ~~~~~~~~ ###
+            imhotep_row_x_start = (imhotep_width / 2 )
+            ### Margin at the bottom and top of the tile as a percent
+            imhotep_row_margin = ((imhotep_width / 2 ) *
+                                  (imhotep_row_margin_percent/100))
+            ### Buffer between the top rows and bottom rows
+            imhotep_middle_buffer = ((imhotep_width / 2 ) *
+                                     (imhotep_middle_buffer_percent/100))
+            ### How much space in each half of the tile, need to remove
+            ### the margin, padding, buffers etc
+            imhotep_working_space = (((imhotep_height/2)-imhotep_row_margin-
+                                      (imhotep_middle_buffer/2))-
+                                     (imhotep_row_buffer*(imhotep_row_no-1)))
+            ### We can then use this working space to figure out how tall each spike is
+            imhotep_spike_height = ((imhotep_working_space) / imhotep_row_no)
+            ### We the space between each row - this is a constant
+            imhotep_row_space = (imhotep_working_space / imhotep_row_no)
+            ### How wide is each spike (we determine the spike to be both the up
+            ### And the down as a whole)
+            imhotep_spike_width = (imhotep_width/(imhotep_spike_no*2))
+            ### This is the length of the spike line itself
+            ### We use pythag here because we already worked out the height of the spike
+            ### And the width of the spike
+            imhotep_spike_length = pythag(imhotep_spike_width,imhotep_spike_height)
+            imhotep_row_y_start = (imhotep_height / 2)
+            ### We need to know how to move osiris, so we need ACOS to find out the
+            ### bottom angle of the spike
+            imhotep_spike_bottom_angle = (work_acos(imhotep_spike_width,
+                                                    imhotep_spike_height,
+                                                    imhotep_spike_length))
+            ### Once we have the bottom angle, we also know that the spike is
+            ### Essentially two right angle triangles, so we can do the math
+            ### Of 180 (as all triangles have 180 degrees), minus the bottom angle
+            ### to give us the top angle
+            imhotep_spike_top_angle = (180 - 90) - imhotep_spike_bottom_angle
+
+            ### ~~~~~~~ DOWNWARD COLUMNS LOGIC ~~~~~~~~ ###
+
+            ### So we need to work out how wide each of the 'slopes' is
+            ### on the downward columns. We do this by taking the width of the tile
+            ### then dividing it by the both the number of downward 'hockey sticks'
+            ### PLUS the number of downward columns. This bit works like a matrix,
+            ### so it's a bit hard to contextulise in text, but as we want everything
+            ### to stay within the tile, we know that (e.g.) if there are two columns
+            ### the first downward column has to finish 'one downward slope' from the
+            ### right hand edge, similarly, the second downward column has to start
+            ### 'one downward slope' from the left hand edge
+            imhotep_slope_width = (imhotep_width / (imhotep_downward_no+
+                                                    imhotep_downward_cols))
+            ### To work out the height of each slope, we just use the height,
+            ### Take away the downward length (our input in the function) TIMES
+            ### The number of downward sections (hockey sticks). We then have to
+            ### divide all of this by the number of downward sections (hockey sticks)
+            ### BUT we have to account for the first downward slope, which isn't a hockey stick
+            ### so we have to add the one needed for this downward slope
+            imhotep_slope_height = ((imhotep_height - (imhotep_downward_length *
+                                                      imhotep_downward_no))/
+                                    (imhotep_downward_no+1))
+            ### As with the spikes, because we figured out the width and height of the
+            ### downward slope, we can then use ACOS to work out the actual drawn length
+            imhotep_slope_length = pythag(imhotep_slope_width,imhotep_slope_height)
+            imhotep_slope_bottom_angle = (work_acos(imhotep_slope_width,imhotep_slope_height,
+                                                    imhotep_slope_length))
+            imhotep_slope_top_angle = (180 - 90) - imhotep_slope_bottom_angle
+
+                                          
+            ### Draws the bounding box for the tile ###
+            osiris.penup()
+            osiris.goto(imhotep_row_x_start,-imhotep_row_y_start)
+            osiris.pendown()
+            osiris.setheading(90)
+            osiris.pensize(imhotep_bounding_pensize)
+            osiris.pencolor(imhotep_bounding_color)
+            for i in range(2):
+                osiris.forward  (imhotep_height)
+                osiris.left     (90)
+                osiris.forward  (imhotep_width)
+                osiris.left     (90)
+            ### Draws the zig-zag rows ###
+            osiris.penup()
+            osiris.goto(0,0)
+            osiris.setheading(90)
+            osiris.goto(-imhotep_row_x_start,(0+(imhotep_middle_buffer/2)))
+            osirisReturnX = osiris.xcor()
+            osirisReturnY = osiris.ycor()
+            osiris.pencolor(imhotep_row_color)
+            osiris.pensize(imhotep_row_pensize)
+            ### imhotep_f - 1 = top, 2 = bottom ##            
+            for imhotep_f in range(1,3):           
+                for imhotep_g in range(1, (imhotep_row_no+1)):
+                    for imhotep_h in range(1, (imhotep_spike_no+1)):
+                        if imhotep_f == 1:
+                            osiris.setheading(90)
+                            osiris.right(90-imhotep_spike_bottom_angle)
+                        else:
+                            osiris.setheading(270)
+                            osiris.left(90-imhotep_spike_bottom_angle)
+                        osiris.pendown()
+                        osiris.forward(imhotep_spike_length)
+                        osiris.penup()
+                        if imhotep_f == 1:
+                            osiris.right(180-(imhotep_spike_top_angle*2))
+                        else:
+                            osiris.left(180-(imhotep_spike_top_angle*2))
+                        osiris.pendown()
+                        osiris.forward(imhotep_spike_length)
+                        osiris.penup()
+                    osiris.goto(osirisReturnX,osirisReturnY)
+                    if imhotep_f == 1:
+                        osiris.setheading(270)
+                    else:
+                        osiris.setheading(90)
+                    osiris.backward(imhotep_row_space+imhotep_row_buffer)
+                    osirisReturnX = osiris.xcor()
+                    osirisReturnY = osiris.ycor()
+                osiris.goto(-imhotep_row_x_start,(0-(imhotep_middle_buffer/2)))
+                osirisReturnX = osiris.xcor()
+                osirisReturnY = osiris.ycor()
+            ### Draws the downward lines ###
+            osiris.pensize(imhotep_downward_pensize)
+            osiris.pencolor(imhotep_downward_color)                
+            for imhotep_m in range(1,3):
+                osiris.goto(0,0)
+                osiris.setheading(90)
+                if imhotep_m == 1:
+                    osiris.goto(-imhotep_row_x_start,imhotep_row_y_start)
+                else:
+                    osiris.goto(imhotep_row_x_start,imhotep_row_y_start)
+                osirisReturnX = osiris.xcor()
+                osirisReturnY = osiris.ycor()
+                for imhotep_n in range(1, (imhotep_downward_cols+1)):
+                    osiris.setheading(90)
+                    if imhotep_m == 1:
+                        osiris.right(180-imhotep_slope_top_angle)
+                    else:
+                        osiris.left(180-imhotep_slope_top_angle)
+                    osiris.pendown()
+                    osiris.forward(imhotep_slope_length)
+                    for imhotep_o in range (1, (imhotep_downward_no+1)):
+                        osiris.setheading(270)
+                        osiris.forward(imhotep_downward_length)
+                        osiris.setheading(90)
+                        if imhotep_m == 1:
+                            osiris.right(180-imhotep_slope_top_angle)
+                        else:
+                            osiris.left(180-imhotep_slope_top_angle)
+                        osiris.pendown()
+                        osiris.forward(imhotep_slope_length)
+                    osiris.penup()
+                    osiris.goto(osirisReturnX,osirisReturnY)
+                    if imhotep_m == 1:
+                        osiris.setheading(0)
+                    else:
+                        osiris.setheading(180)
+                    osiris.forward(imhotep_slope_width)
+                    osirisReturnX = osiris.xcor()
+                    osirisReturnY = osiris.ycor()
+            ### Outputs the input values for the tile ###                    
+            if imhotep_write_output == 1:
+                osiris.goto(-imhotep_row_x_start,-imhotep_row_y_start)
+                for imhotep_write in ['imhotep_width','imhotep_height','imhotep_spike_no',
+                                      'imhotep_row_no','imhotep_row_margin_percent',
+                                      'imhotep_row_buffer',
+                                      'imhotep_middle_buffer_percent','imhotep_downward_length',
+                                      'imhotep_downward_no','imhotep_downward_cols']:
+                    osiris.setheading(90)
+                    osiris.backward(20)
+                    osiris.write(imhotep_write)
+                osiris.goto(-(imhotep_row_x_start-200),-imhotep_row_y_start)
+                for imhotep_write in [imhotep_width,imhotep_height,imhotep_spike_no,
+                                      imhotep_row_no,imhotep_row_margin_percent,
+                                      imhotep_row_buffer,
+                                      imhotep_middle_buffer_percent,imhotep_downward_length,
+                                      imhotep_downward_no,imhotep_downward_cols]:
+                    osiris.setheading(90)
+                    osiris.backward(20)
+                    osiris.write(imhotep_write)              
+        else:
+            print('Downward value too high, will draw outside of tile')
+                                   
 ####################################
 ### Kebechet = Criss Cross Lines ###
 ### Goddess of purification      ###
@@ -888,9 +1172,9 @@ def hedetet(hedetet_y,hedetet_start,hedetet_no,hedetet_size,
 ### Developed using
 ### 1,50,12,75,100,40,10,3,'#FF4444') 
 
-def kebechet(kebechet_y,kebechet_start,kebechet_no,
-             kebechet_distance,kebechet_length,kebechet_angle,
-             kebechet_change,kebechet_size,kebechet_color):
+def kebechet(kebechet_y=1,kebechet_start=50,kebechet_no=12,
+             kebechet_distance=75,kebechet_length=100,kebechet_angle=40,
+             kebechet_change=10,kebechet_size=3,kebechet_color='#FF4444'):
     if kebechet_y == 1:
         osiris.penup()
         osiris.pensize(kebechet_size)
@@ -931,6 +1215,70 @@ def kebechet(kebechet_y,kebechet_start,kebechet_no,
                         ((kebechet.b+1)*kebechet_change)))
         osirisCurrentX = osiris.xcor()  
         osirisCurrentY = osiris.ycor()
+        
+#######################################
+### Khepri = Isometric Tiles        ###
+### God of the rebirth and creation ###
+#######################################
+### Developed Using 
+### khepri_y=1,khepri_no=2,khepri_length=100,
+### khepri_density=4,khepri_pensize=1,
+### khepri_pencolor='#FF0000',khepri_fillcolor='#FF0000'
+
+def khepri(khepri_y=1,khepri_no=2,khepri_length=100,
+           khepri_density=4,khepri_pensize=1,
+           khepri_pencolor='#FF0000',khepri_fillcolor='#FF0000'):    
+    if khepri_y == 1:
+        def khepri_west():
+            osiris.setheading(90)
+            osiris.right(120)
+            osiris.pendown()
+            khepri_fill_y = randint(1,khepri_density)
+            if khepri_fill_y > 1:
+                osiris.begin_fill()
+            for khepri_f in range(1,4):
+                osiris.forward(khepri_length)
+                osiris.left(120)
+            if khepri_fill_y > 1:
+                osiris.end_fill()
+            osiris.penup()
+        def khepri_east():
+            osiris.pendown()
+            khepri_fill_y = randint(1,khepri_density)
+            if khepri_fill_y > 1:
+                osiris.begin_fill()
+            for khepri_g in range(1,4):
+                osiris.forward(khepri_length)
+                osiris.right(120)
+            if khepri_fill_y > 1:
+                osiris.end_fill()
+            osiris.penup()
+        osiris.pensize(khepri_pensize)
+        osiris.pencolor(khepri_pencolor)
+        osiris.fillcolor(khepri_fillcolor)
+        khepri_x = (eq_triangle_height(khepri_length) *
+                    ((khepri_no+1)/2))
+        khepri_y = ((khepri_length/2) * (khepri_no-1))
+        osiris.goto(-khepri_x,khepri_y)       
+        for khepri_a in range(1,(khepri_no+2)):
+            for khepri_e in range(1,(khepri_no+1)):
+                if khepri_e == 1:
+                    osirisReturnX = osiris.xcor()
+                    osirisReturnY = osiris.ycor()            
+                khepri_west()
+                khepri_east()
+                osiris.right(60)
+                osiris.forward(khepri_length)
+            if khepri_a % 2 == 0:
+                khepri_west()
+                osiris.goto(osirisReturnX, osirisReturnY)
+                osiris.forward(khepri_length)
+            else:
+                osiris.goto(osirisReturnX, osirisReturnY)
+                osiris.setheading(90)
+                khepri_east()
+                osiris.right(60)
+                osiris.forward(khepri_length)
 
 #####################################
 ### Khnum = Strong Vertical Lines ###
@@ -1522,6 +1870,97 @@ def safekh(safekh_y,safekh_size,
                 osiris.pendown()
         osiris.penup()
 
+########################################################
+### Serket = Increasing cone with criss cross lines  ###
+### A scorpion goddess                               ###
+########################################################
+### Developed Using These Integars 
+### serket_y=1,serket_start=50,serket_angle=25,
+### serket_angle_for_outer=35,serket_outer_length=40,
+### serket_increase=30,serket_no=10,
+### serket_inner_pensize=1,serket_outer_pensize=3,
+### serket_pencolor='#FF0900'):
+
+def serket(serket_y=1,serket_start=50,serket_angle=25,
+           serket_angle_for_outer=35,serket_outer_length=40,
+           serket_increase=30,serket_no=10,
+           serket_inner_pensize=1,serket_outer_pensize=3,
+           serket_pencolor='#FF0900'):
+    if serket_y == 1:
+        ## We know the outer line is on an angle
+        ## we need to take this angle away from 180
+        ## We then take away another 90 because we know
+        ## It is a right angle triangle
+        serket_back_angle = (180 - 90 -
+                             serket_angle)
+        ## We then take this number, minus the angle
+        ## we used for the ANGLE_FOR_OUTER
+        ## This gives us the angle we need for the SIN function
+        serket_new_angle = (180 - serket_angle_for_outer -
+                            serket_back_angle)
+        ## Now we need to work out the opposite angle
+        serket_output_angle = (180 - (serket_angle_for_outer*2) -
+                            serket_new_angle)
+        osiris.penup()
+        osiris.goto(osirisStartingX, osirisStartingY)
+        osiris.setheading(osirisHeadingStart)
+        osiris.forward(serket_start)
+        osiris.pencolor(serket_pencolor)
+        osirisReturnX = osiris.xcor()
+        osirisReturnY = osiris.ycor()
+        for serket_a in range (1,3):
+            osiris.pensize(serket_inner_pensize)
+            serket_outer_length_actual = serket_outer_length
+            for serket_m in range(1,(serket_no+1)):
+                serket_horizontal = (work_sin
+                                     (serket_outer_length_actual,
+                                      serket_angle))
+                serket_height_from_hor = (work_tan_opp
+                                          (serket_horizontal,
+                                           serket_angle_for_outer))
+                serket_down_length = (pythag
+                                      (serket_horizontal,
+                                       serket_height_from_hor))
+
+                if serket_a == 1:
+                    osiris.left(serket_angle)
+                    osiris.forward(serket_outer_length_actual)
+                else:
+                    osiris.right(serket_angle)
+                    osiris.forward(serket_outer_length_actual)
+                if serket_a == 1:
+                    osiris.right(90+serket_angle)
+                    osiris.left(serket_angle_for_outer)
+                else:
+                    osiris.left(90+serket_angle)
+                    osiris.right(serket_angle_for_outer)
+                osiris.pendown()
+                osiris.forward(serket_down_length)
+                osirisCurrentX = osiris.xcor()
+                osirisCurrentY = osiris.ycor()                
+                # Get in position for going back up
+                osiris.setheading(osirisHeadingStart)
+                if serket_a == 1:
+                    osiris.left(90 - serket_angle_for_outer)
+                else:
+                    osiris.right(90 - serket_angle_for_outer)
+                serket_back_length = (work_sin_opp
+                                      (serket_output_angle,
+                                       serket_new_angle,
+                                       serket_down_length))
+                osiris.forward(serket_back_length)
+                osiris.penup()
+                osirisTemporaryX = osiris.xcor()
+                osirisTemporaryY = osiris.ycor()
+                if serket_m == serket_no:
+                    osiris.pensize(serket_outer_pensize)
+                    osiris.pendown()
+                osiris.goto(osirisReturnX,osirisReturnY)
+                osiris.penup()
+                osiris.setheading(osirisHeadingStart)
+                serket_outer_length_actual = (serket_outer_length_actual +
+                                       serket_increase)
+
 ##############################################
 ### Seshat = Random circular chaos dashes  ###
 ### Goddess of astronomy, maths            ###
@@ -1716,9 +2155,12 @@ def osirisslow():
     osiris.speed(1)
 def osirismid():
     osiris.speed(4)
+##def osirissuper():
+##    osiris.speed(7)
 def osirisquick():
     osiris.speed(0)
 turtle.onkey(osirisquick,"0")
+##turtle.onkey(osirissuper,"7")
 turtle.onkey(osirismid,"4")
 turtle.onkey(osirisslow,"1")
 turtle.listen()
@@ -1731,10 +2173,26 @@ osiris.goto(0,0)
 #GEOMETRIC TILES#
 #################
 
+### IMHOTEP      ### ISLAMIC-INSPIRED TILE 
+imhotep(imhotep_y = 1,imhotep_width = 400,imhotep_height = 400,
+        imhotep_spike_no = 3,imhotep_row_no = 3,
+        imhotep_row_margin_percent = 10,imhotep_middle_buffer_percent=10,
+        imhotep_row_buffer = 10, imhotep_downward_length=75,
+        imhotep_downward_no=3, imhotep_downward_cols=3,
+        imhotep_row_pensize = 2, imhotep_row_color = '#FF3300',
+        imhotep_downward_pensize = 2, imhotep_downward_color = '#0033FF',
+        imhotep_bounding_pensize = 2, imhotep_bounding_color = '#00FF33',
+        imhotep_write_output=1)
+                                      
+### KHEPRI      ### ISOMETRIC RANDOM TILES
+khepri(khepri_y=0,khepri_no=7,khepri_length=25,
+       khepri_density=3,khepri_pensize=0,
+       khepri_pencolor='#FF0000',khepri_fillcolor='#00FFC0')
+
 ### KHONSU      ### GEOMETRIC TILED STAR ###
 ### khonsu_y,khonsu_size,khonsu_no,
 ### khonsu_fill_color
-khonsu(0,10,4,'#40CCFF')
+khonsu(0,20,2,'#40CCFF')
     
 ### APEP        ### TILED PATTERN WITH SQUARES ###
 ### apep_y,apep_size,apep_square_y_n,
@@ -1756,7 +2214,7 @@ bennu(0,300,0,0,0,5,1,'#000000','#000000')
 ### amun_y,amun_no,amun_angle_a,amun_angle_b,
 ### amun_forward_a,amun_forward_b,
 ### amun_pensize,amun_color
-amun(0,46,0,180,150,600,2,'#FF1493')
+amun(0,12,0,180,150,800,4,'#FF1493')
 
 ### ANUBIS      ### CONCENTRIC SQUARES WITH SHAPES
 ### anubis_y,anubis_no,anubis_size,anubis_reduction,
@@ -1765,10 +2223,17 @@ amun(0,46,0,180,150,600,2,'#FF1493')
 ### anubis_cross_reduction,anubis_pensize,anubis_color
 anubis(0,3,400,40,0,14,6,1,14,8,3,3,'#90CC16')
 
-geb(geb_y=0,geb_no=10,geb_circum_a=20,geb_circum_b=200,
-    geb_distance_a=50,geb_distance_b=300,
-    geb_circle_reduction_a=3,geb_circle_reduction_b=50,
-    geb_pensize=1,geb_pencolor='#0000FF',geb_fillcolor='#FF0000')
+### GEB         ### FILLED IN CIRCLE SEGMENTS
+geb(geb_y=0,geb_no=13,geb_circum_a=10,geb_circum_b=250,
+    geb_distance_a=50,geb_distance_b=400,
+    geb_circle_reduction_a=5,geb_circle_reduction_b=75,
+    geb_pensize=3,geb_pencolor='#0000FF',geb_fillcolor='#FF0000')
+
+### HEF         ### RANDOM SQUARES
+hef(hef_y=0,hef_no=12,hef_angle_a=0,hef_angle_b=360,
+    hef_forward_a=0,hef_forward_b=300,hef_length_a=50,
+    hef_length_b=300,hef_pensize=6,hef_pencolor='#FFFFFF',
+    hef_fillcolor='#00FF00')
 
 ### RAET        ### CIRCLES AND DOTS
 ### raet_y,raet_no,raet_forward,raet_line_y,
@@ -1788,12 +2253,11 @@ seth(0,10,0,270,0,30,300,5,100,1,'#1234FF')
 ################
 
 ### SHAI & SIA  ### CONTROLS THE DISTANCE BETWEEN EACH CIRCLE
-shai                    = 15
+shai                    = 100
 sia                     = shai
 
-for sia_range in range(0): 
-    sia = sia + shai # NO NEED TO CHANGE THIS (EVER)
-
+for sia_range in range(1,1): 
+      
 ### SOPDU       ### INVERTED CRISS CROSS ###
 ### sopdu_y,sopdu_no,sopdu_distance,
 ### sopdu_angle,sopdu_forward,sopdu_increase,
@@ -1814,14 +2278,14 @@ for sia_range in range(0):
 ### safekh_y,safekh_size,
 ### safekh_pensize,safekh_color,sia
     safekh(0,80,2,'#001493',sia)
-
+    sia = sia + shai # NO NEED TO CHANGE THIS (EVER)
 ################
 #ROTATE SECTION#
 ################
 
 ### SHU         ### CONTROLS THE AMOUNT OF ROTATIONS
 
-shu =  1
+shu = 0
 
 # if you want these on different diagonals - remember to divide it by SHU.
 # EG.   First round = 90 when shu = 6
@@ -1830,11 +2294,21 @@ osiris.setheading(90)
 for shu_a in range(shu):
     osiris.penup()             
     osiris.goto(0,0)
-    osiris.forward(0)   
+    osiris.forward(75)   
     osirisHeadingStart = osiris.heading()  
     osirisStartingX = osiris.xcor()
     osirisStartingY = osiris.ycor()
-  
+
+### SERKET        ### CONE WITH CRISS CROSS LINES
+    serket(serket_y=0,serket_start=0,serket_angle=20,
+           serket_angle_for_outer=35,serket_outer_length=100,
+           serket_increase=20,serket_no=21,
+           serket_inner_pensize=1,serket_outer_pensize=3,
+           serket_pencolor='#FF0900')
+    
+### Make sure we reset the position
+    osiris.goto(osirisStartingX,osirisStartingY)
+    osiris.setheading(osirisHeadingStart)
 
 ### BAST        ### ZIG ZAG LINES
 ### bast_y,bast_start,bast_angle,bast_forward,
@@ -1847,9 +2321,9 @@ for shu_a in range(shu):
     osiris.setheading(osirisHeadingStart)
 
 ### HAPI        ### CROSS OVER LINES - VERTICAL
-    hapi(hapi_y=1,hapi_start=0,hapi_length=300,
-         hapi_angle=30,hapi_line_no=10,hapi_section_no=3,
-         hapi_space=20,hapi_pensize=5,hapi_color='#FF3333')
+    hapi(hapi_y=0,hapi_start=0,hapi_length=1000,
+         hapi_angle=-30,hapi_line_no=7,hapi_section_no=3,
+         hapi_space=10,hapi_pensize=2,hapi_color='#FF3333')
 
 ### Make sure we reset the position
     osiris.goto(osirisStartingX,osirisStartingY)
@@ -1880,7 +2354,7 @@ for shu_a in range(shu):
 ### ANHUR       ### FORWARD FACING CHEVONS
 ### anhur_y,anhur_start,anhur_no,anhur_size,
 ### anhur_spacing,anhur_pensize,anhur_color    
-    anhur(0,50,9,80,28,5,'#00FF00')
+    anhur(0,50,9,380,28,5,'#00FF00')
 
 ### ANPUT       ##= DOUBLE HELIX
 ### anput_y,anput_start,anput_outer,
@@ -1899,7 +2373,7 @@ for shu_a in range(shu):
 ### hathor_gap,hathor_angle,hathor_length,
 ### hathor_reduction,hathor_indent,hathor_spacing,
 ### hathor_pensize,hathor_color
-    hathor(0,50,15,8,55,8,140,15,15,10,2,'#FF4444')
+    hathor(1,50,0,50,200,8,140,15,15,10,2,'#FF4444')
 
 ### HEDETET     ### CURVEY TWISTED FLAX LINES
 ### hedetet_y,hedetet_start,hedetet_no,hedetet_size,
@@ -1911,14 +2385,23 @@ for shu_a in range(shu):
 ### kebechet_y,kebechet_start,kebechet_no,
 ### kebechet_distance,kebechet_length,kebechet_angle,
 ### kebechet_change,kebechet_size,kebechet_color
-    kebechet(0,50,7,75,100,30,10,2,'#FF4444')
+    kebechet(kebechet_y=0,kebechet_start=125,kebechet_no=16,
+             kebechet_distance=150,kebechet_length=200,kebechet_angle=45,
+             kebechet_change=-10,kebechet_size=3,kebechet_color='#FF4444')
+
+
+#    kebechet(kebechet_y=1,kebechet_start=50,kebechet_no=12,
+#             kebechet_distance=95,kebechet_length=450,kebechet_angle=45,
+#             kebechet_change=-50,kebechet_size=3,kebechet_color='#FF4444')
+
+    
     #kebechet(1,50,7,75,100,30,10,2,'#FF4444')##keepme
     #kebechet(1,50,14,150,200,30,10,2,'#FF4444')##keepme
     
 ### KUK         ### DIAMOND SHAPES GROWS INSIDE
 ### kuk_y,kuk_start,kuk_no,kuk_angle,
 ### kuk_depth,kuk_gap,kuk_pensize,kuk_color
-    kuk(0,0,11,40,400,0.86,3,'#FF4444')
+    kuk(0,0,5,40,200,0.86,3,'#FF4444')
 
 ### MAAT        ### REVERSE ANGEL WINGS
 ### maat_y,maat_start,maat_no,maat_gap,
@@ -1942,9 +2425,9 @@ for shu_a in range(shu):
     ptah(0,100,10,20,300,2,'#FF4444')          
 
 ### PAKHET      ### RHOMBUS WITH CRISS CROSS LINES
-    pakhet(pakhet_y=0, pakhet_start=-360, pakhet_no=3, pakhet_inner_no=6,
-           pakhet_inner_no_increase=3, pahket_angle_difference=20,
-           pakhet_gap=0, pakhet_length=100, pakhet_length_increase=50,
+    pakhet(pakhet_y=0, pakhet_start=0, pakhet_no=2, pakhet_inner_no=2,
+           pakhet_inner_no_increase=3, pahket_angle_difference=0,
+           pakhet_gap=0, pakhet_length=50, pakhet_length_increase=50,
            pakhet_outer_y=0, pakhet_outer_space=1.1, pakhet_main_pensize=6,
            pakhet_inner_pensize=1, pakhet_outline_pensize=2, pakhet_color='#FF4444')
 
@@ -1960,7 +2443,7 @@ for shu_a in range(shu):
 ### SOBEK       ### ARROWS WITH PARALLEL LINES
 ### sobek_y,sobek_start,sobek_angle,sobek_span,
 ### sobek_forward,sobek_no,sobek_pensize,sobek_color): 
-    sobek(0,-100,60,20,100,10,6,'#F7A120')  
+    sobek(0,-25,45,26,150,30,4,'#F7A120')  
     
 ###################
 #COMMAND TO ROTATE#
