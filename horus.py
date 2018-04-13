@@ -8,16 +8,17 @@ from random import *
 wn = turtle.Screen()
 osiris = turtle.Turtle()
 wn.screensize(10000, 10000)
+djet = strftime("%Y-%m-%d %H-%M-%S")
 
 ### SCREENSHOT COMMAND ON 'A' KEYBOARD PRESS ###
 
 def ihy():
     ts = osiris.getscreen()
     osiris.hideturtle()
-    ts.getcanvas().postscript(file="horus - " +
-                              strftime("%Y-%m-%d %H-%M-%S") +
+    ts.getcanvas().postscript(file="horus - " + djet +
                               ".eps", width=5000, height=5000)
     osiris.showturtle()
+    print ('screenshot taken')
 turtle.onkey(ihy,"a")
 turtle.listen()
 
@@ -46,6 +47,22 @@ def work_sin(sin_length,sin_angle):
     sin_number = ((math.sin(math.radians(sin_angle)))*sin_length)
     return sin_number
 
+    ## Example 1: https://www.mathsisfun.com/algebra/trig-solving-sas-triangles.html##
+
+def work_cos_sas(side_1,side_2,cos_angle):
+    cos_b = (side_1 ** 2) 
+    cos_c = (side_2 ** 2)
+    cos_1 = (math.cos(math.radians(cos_angle)))
+    cos_workout_1 = (cos_b + cos_c) - (2 * side_1 * side_2 * cos_1)
+    cos_number = math.sqrt(cos_workout_1)
+    return cos_number
+
+def work_sin_by_sin(sin_length_1,sin_angle_1,sin_length_2,sin_angle_2):
+    sin_1 = (sin_length_1/(math.sin(math.radians(sin_angle_1))))
+    sin_2 = (math.sin(math.radians(sin_angle_2))* sin_length_2)
+    sin_number = sin_1 * sin_2
+    return sin_number
+
 def work_cos(cos_length,cos_angle):
     cos_number = ((math.cos(math.radians(cos_angle)))*cos_length)
     return cos_number
@@ -66,8 +83,9 @@ def work_sin_opp(sin_opp_angle_adj,sin_opp_angle_opp,sin_opp_length):
     return sin_opp_c  
 
 def work_acos(A,B,C):
-    X = math.degrees(math.acos((C * C + A * A - B * B)/(2.0 * C * A))) # bottom angle
+    X = math.degrees(math.acos(((C ** 2) + (A ** 2) - (B ** 2))/(2.0 * C * A))) 
     return X
+
 
 '''
 #############################################################
@@ -366,6 +384,222 @@ def anubis(anubis_y,anubis_no,anubis_size,anubis_reduction,
                 osiris.left(90)
                 osiris.forward(anubis_size)
             osiris.penup()
+
+
+###################################################
+### Anubis = Upward spikes and downward slashes ###
+### Warlike Egyptian Lion God                   ###
+###################################################
+### Developed using
+##    apedemak_y=1,apedemak_start=0,
+##    apedemak_span_angle=70,apedemak_spike_inner_angle= 60,
+##    apedemak_length = 400,apedemak_spike_no = 5,
+##    apedemak_little_spike = 1,apedemak_little_spike_type = 'percentage',
+##    apedemak_little_spike_reduction = 0.5,adepemak_slash_space = 0.5,
+##    adepemak_slash_extension = 200,adepemak_slash_no = 3,
+##    apedemak_spike_pensize = 4,apedemak_spike_color = '#FF4400',
+##    apedemak_little_spike_pensize = 3,apedemak_little_spike_color = '#FF4499',
+##    apedemak_slash_pensize = 6,apedemak_slash_color = '#4444FF' 
+
+def apedemak(
+    apedemak_y=1,apedemak_start=0,
+    apedemak_span_angle=70,apedemak_spike_inner_angle= 60,
+    apedemak_length = 400,apedemak_spike_no = 5,
+    apedemak_little_spike = 1,apedemak_little_spike_type = 'percentage',
+    apedemak_little_spike_reduction = 0.5,adepemak_slash_space = 0.5,
+    adepemak_slash_extension = 200,adepemak_slash_no = 3,
+    apedemak_spike_pensize = 4,apedemak_spike_color = '#FF4400',
+    apedemak_little_spike_pensize = 3,apedemak_little_spike_color = '#FF4499',
+    apedemak_slash_pensize = 6,apedemak_slash_color = '#4444FF'        
+    ):
+    if apedemak_y == 1:
+        ### Universal Settings
+        osiris.setheading(osirisHeadingStart)
+        osiris.forward(apedemak_start)
+        osirisReturnX = osiris.xcor()
+        osirisReturnY = osiris.ycor()
+        apedemak_bottom_angle = (apedemak_span_angle/2)
+        apedemak_outer_line = apedemak_length + adepemak_slash_extension
+
+        ### Upward Spike Measurements
+        apedemak_spike_angle = (180 - 90 
+                               - apedemak_spike_inner_angle) # Angle from centre
+
+        ### Downward Slash Measurements
+        # Used for calculating top splash
+        apedemak_slash_angle_a = (180 - apedemak_spike_angle -
+                                  apedemak_bottom_angle)
+
+        # Height from the bottom of the cone to the top of the middle    
+        apedemak_height = (work_sin_opp(apedemak_spike_inner_angle,
+                                        apedemak_slash_angle_a,
+                                        apedemak_length))
+
+        # The top slash line - also used to calculate the other slashes
+        apedemak_slash_first_line = (work_cos_sas(apedemak_outer_line,
+                                                apedemak_height,
+                                                apedemak_bottom_angle))
+        
+        # The top most outer angle    
+        apedemak_slash_top_angle = (work_acos(apedemak_outer_line,
+                                        apedemak_height,
+                                        apedemak_slash_first_line))
+        
+        # The maximum height between the bottom and top slash terminal points
+        apedemak_slash_terminal_height = (apedemak_height *
+                                          adepemak_slash_space)
+
+        # The gap between where the downward slash lines terminate    
+        apedemak_slash_gap = (apedemak_slash_terminal_height /
+                              (adepemak_slash_no - 1))
+
+        # The angle for the top slash from the top-middle of the cone
+        apedemak_slash_angle_b = (180 - apedemak_bottom_angle
+                                  - apedemak_slash_top_angle)
+        for apedemak_a in range(1,3):
+            osiris.setheading(osirisHeadingStart)
+            osiris.goto(osirisReturnX, osirisReturnY)
+            apedemak_spike_outer_length = apedemak_length
+            # Calculation to reduce the distance that Osiris
+            # starts each spike at.
+            apedemak_red_distance = (apedemak_length
+                                     / apedemak_spike_no)
+            for apedemak_g in range(1,apedemak_spike_no+1):
+                osiris.goto(osirisReturnX, osirisReturnY)                
+                # The distance from where the spike starts
+                # to the centre of the cone - at a 90 degree angle.
+                # We can't use secant so need this workaround :(
+                apedemak_spike_hor = (work_sin
+                                      (apedemak_spike_outer_length,
+                                       apedemak_bottom_angle))
+                # The distance from the above calculation terminates
+                # at the centre of the cone to where the spike will
+                # terminate at - we already know the angle we want to use
+                apedemak_spike_upwards = (work_tan_opp
+                                          (apedemak_spike_hor,
+                                           apedemak_spike_angle))
+                # Now we work out the actual spike height -
+                # We can use pythag because we calcuated the above on
+                # a right angle triangle - neat :)
+                apedemak_spike_length = pythag(apedemak_spike_upwards,
+                                              apedemak_spike_hor)
+                # We need this measurement to work out the first slash
+                # later in the function
+                if apedemak_g == 1:
+                    apedemak_slash_measure_a = apedemak_spike_length
+
+                ### Now we can begin to move Osiris around 
+                osiris.setheading(osirisHeadingStart)
+                if apedemak_a == 1:
+                    osiris.left(apedemak_bottom_angle)
+                else:
+                    osiris.right(apedemak_bottom_angle)
+                osiris.forward(apedemak_spike_outer_length)
+                osiris.setheading(osirisHeadingStart)
+                if apedemak_a == 1:                
+                    osiris.right(90-apedemak_spike_angle)
+                else:                
+                    osiris.left(90-apedemak_spike_angle)
+                osiris.pendown()
+                osiris.pensize(apedemak_spike_pensize)
+                osiris.color(apedemak_spike_color)
+                osiris.forward(apedemak_spike_length)
+                osiris.penup()
+                osiris.goto(osirisReturnX, osirisReturnY)
+                # Make sure the little spikes start half the distance
+                # of the big spikes
+                apedemak_little_spike_start = (apedemak_spike_outer_length
+                                                 -(apedemak_red_distance/2))
+                # Little Spike Measurements - Use the same logic as
+                # the build up for the big spikes above in the function
+                apedemak_little_spike_hor = (work_sin(apedemak_little_spike_start,
+                                              apedemak_bottom_angle))
+                apedemak_little_spike_height = (work_tan_opp(apedemak_little_spike_hor,
+                                                   apedemak_spike_angle))
+                apedemak_little_spike_length = pythag(apedemak_little_spike_height,
+                                              apedemak_little_spike_hor)                
+                if apedemak_little_spike == 1:
+                    if apedemak_little_spike_type == 'percentage':
+                        # Working out where the little line gap
+                        apedemak_little_spike_gap = (apedemak_little_spike_length * 
+                                                apedemak_little_spike_reduction)
+
+                        # work out the little line actual length
+                        apedemak_little_spike_actual_length = (apedemak_little_spike_length -
+                                                              apedemak_little_spike_gap)
+
+                    if apedemak_little_spike_type == 'consistent':
+                        # Working out where the little line gap
+                        apedemak_little_spike_gap = (apedemak_little_spike_length -
+                                                     apedemak_little_spike_reduction)
+
+                        # work out the little line actual length
+                        apedemak_little_spike_actual_length = (apedemak_little_spike_length -
+                                                               apedemak_little_spike_gap)
+                    osiris.setheading(osirisHeadingStart)
+                    if apedemak_a == 1:
+                        osiris.left(apedemak_bottom_angle)
+                    else:
+                        osiris.right(apedemak_bottom_angle)
+                    osiris.forward(apedemak_little_spike_start)
+                    # Get osiris into position for the actual drawn line)
+                    osiris.setheading(osirisHeadingStart)
+                    if apedemak_a == 1:                
+                        osiris.right(90-apedemak_spike_angle)
+                    else:                
+                        osiris.left(90-apedemak_spike_angle)
+                    osiris.forward(apedemak_little_spike_gap)
+                    osiris.pendown()
+                    osiris.pensize(apedemak_little_spike_pensize)
+                    osiris.color(apedemak_little_spike_color)
+                    osiris.forward(apedemak_little_spike_actual_length)
+                    osiris.penup()        
+                # The actual length of the outside line
+                apedemak_spike_outer_length = (apedemak_spike_outer_length-
+                                               apedemak_red_distance)
+            ### Start of the slashes
+            osiris.goto(osirisReturnX, osirisReturnY)
+            osiris.setheading(osirisHeadingStart)
+            if apedemak_a == 1:
+                osiris.left(apedemak_bottom_angle)
+            else:
+                osiris.right(apedemak_bottom_angle)
+            osiris.forward(apedemak_outer_line)
+            if apedemak_a == 1:
+                osiris.right(180-apedemak_slash_top_angle)
+            else:
+                osiris.left(180-apedemak_slash_top_angle)        
+            osiris.pendown()
+            osiris.pensize(apedemak_slash_pensize)
+            osiris.color(apedemak_slash_color)
+            osiris.forward(apedemak_slash_first_line)
+            osiris.penup()
+            for apedemak_t in range(1,adepemak_slash_no):
+                # The slash gap has to increase on each iteration
+                apedemak_slash_gap_dymanic = (apedemak_slash_gap *
+                                              apedemak_t)
+                # The length of the slash - for the second line onwards 
+                apedemak_slash_length_2plus = work_cos_sas(apedemak_slash_first_line,
+                                                  apedemak_slash_gap_dymanic,
+                                                  apedemak_slash_angle_b)
+                # The top outer angle - for the second line onwards 
+                apedemak_slash_angle_2plus = work_acos(apedemak_slash_first_line,
+                                                   apedemak_slash_gap_dymanic,
+                                                   apedemak_slash_length_2plus)
+                osiris.goto(osirisReturnX, osirisReturnY)
+                osiris.setheading(osirisHeadingStart)
+                if apedemak_a == 1:
+                    osiris.left(apedemak_bottom_angle)
+                else:
+                    osiris.right(apedemak_bottom_angle)
+                osiris.forward(apedemak_outer_line)
+                if apedemak_a == 1:
+                    osiris.right(180-apedemak_slash_top_angle+apedemak_slash_angle_2plus)
+                else:
+                    osiris.left(180-apedemak_slash_top_angle+apedemak_slash_angle_2plus)        
+                osiris.pendown()
+                osiris.forward(apedemak_slash_length_2plus)
+                osiris.penup()    
 
 ################################################
 ### Apep = Tiled Square with squares         ###        
@@ -1599,7 +1833,6 @@ def mafdet(mafdet_y,mafdet_start,mafdet_no,mafdet_length,
 ### pakhet_gap=10, pakhet_length=100, pakhet_length_increase=10,
 ### pakhet_outer_y=1, pakhet_outer_space=1.1, pakhet_main_pensize=4,
 ### pakhet_inner_pensize=1, pakhet_outline_pensize=2, pakhet_color='#FF4444')
-
 def pakhet(pakhet_y=1,pakhet_start=20,pakhet_no=2,pakhet_inner_no=4,
                        pakhet_inner_no_increase=2,pahket_angle_difference=12,
                        pakhet_gap=10,pakhet_length=100,pakhet_length_increase=10,
@@ -2120,6 +2353,226 @@ def sopdu(sopdu_y,sopdu_no,sopdu_distance,
             osiris.forward(sopdu_forward+
                            (sia_range*sopdu_increase))
 
+#######################################################
+### Thoth = Randomly generated tile                 ###
+### God of Knowledge, the Moon, Measurement, Wisdom ###
+#######################################################
+########### Developed using
+##thoth_y=1,thoth_height=500,thoth_ray_no_min = 1,
+##thoth_ray_no_max = 4,thoth_ray_reverse_no_min = 1,
+##thoth_ray_reverse_no_max = 4,thoth_stripe_no_min = 1,
+##thoth_stripe_no_max = 4,thoth_stripe_reverse_no_min = 1,
+##thoth_stripe_reverse_no_max = 4,thoth_halo_no_min = 1,
+##thoth_halo_no_max = 4,thoth_circle_no_min = 1,
+##thoth_circle_no_max = 4, 
+##thoth_ray_pensize = 2,thoth_ray_color = '#990000',
+##thoth_ray_reverse_pensize = 2,thoth_ray_reverse_color = '#990000',
+##thoth_stripe_pensize = 2,thoth_stripe_color = '#990000',
+##thoth_stripe_reverse_pensize = 2,thoth_stripe_reverse_color = '#990000',
+##thoth_halo_pensize = 2,thoth_halo_color = '#990000',
+##thoth_circle_pensize = 2,thoth_circle_color = '#990000' 
+
+def thoth(
+    thoth_y=1,thoth_height=500,thoth_ray_no_min = 1,
+    thoth_ray_no_max = 4,thoth_ray_reverse_no_min = 1,
+    thoth_ray_reverse_no_max = 4,thoth_stripe_no_min = 1,
+    thoth_stripe_no_max = 4,thoth_stripe_reverse_no_min = 1,
+    thoth_stripe_reverse_no_max = 4,thoth_halo_no_min = 1,
+    thoth_halo_no_max = 4,thoth_circle_no_min = 1,
+    thoth_circle_no_max = 4, 
+    thoth_ray_pensize = 2,thoth_ray_color = '#990000',
+    thoth_ray_reverse_pensize = 2,thoth_ray_reverse_color = '#990000',
+    thoth_stripe_pensize = 2,thoth_stripe_color = '#990000',
+    thoth_stripe_reverse_pensize = 2,thoth_stripe_reverse_color = '#990000',
+    thoth_halo_pensize = 2,thoth_halo_color = '#990000',
+    thoth_circle_pensize = 2,thoth_circle_color = '#990000' 
+    ):
+    if thoth_y == 1:
+        thoth_ray_y = (randint(0,1))    
+        thoth_ray_reverse_y = (randint(0,1))    
+        thoth_stripe_y = (randint(0,1))    
+        thoth_stripe_reverse_y = (randint(0,1))
+        thoth_halo_y = (randint(0,1))    
+        thoth_circle_y = (randint(0,1))
+        thoth_ray_no = (randint(thoth_ray_no_min,thoth_ray_no_max))
+        thoth_ray_reverse_no = (randint(thoth_ray_reverse_no_min,thoth_ray_reverse_no_max))
+        thoth_stripe_no = (randint(thoth_stripe_no_min,thoth_stripe_no_max))
+        thoth_stripe_reverse_no = (randint(thoth_stripe_reverse_no_min,thoth_stripe_reverse_no_max))
+        thoth_halo_no = (randint(thoth_halo_no_min,thoth_halo_no_max))
+        thoth_circle_no = (randint(thoth_circle_no_min,thoth_circle_no_max))
+        thoth_cell_height = thoth_height / 2
+        thoth_ray_height = thoth_cell_height / thoth_ray_no
+        thoth_ray_reverse_height = thoth_cell_height / thoth_ray_reverse_no     
+        thoth_stripe_height = thoth_cell_height / thoth_stripe_no
+        thoth_stripe_reverse_height = thoth_cell_height / thoth_stripe_reverse_no        
+        thoth_halo_size = thoth_cell_height / thoth_halo_no
+        thoth_circle_size = thoth_cell_height / thoth_circle_no
+        # Outer Stroke
+        osiris.goto(-thoth_cell_height,thoth_cell_height)
+        osiris.setheading(270)
+        for thoth_box_range in range(1,5):
+            osiris.pendown()
+            osiris.forward(thoth_height)
+            osiris.left(90)
+            osiris.penup()
+        ### Inner Circles            
+        if thoth_circle_y == 1:
+            osiris.pensize(thoth_circle_pensize)
+            osiris.color(thoth_circle_color)
+            for thoth_circle_a in range(1,(thoth_circle_no+1)):
+                osiris.goto(0,0)
+                osiris.setheading(90)
+                osiris.forward(thoth_circle_size*thoth_circle_a)
+                osiris.left(90)
+                thoth_circle_on_off = (randint(0,1))
+                if thoth_circle_on_off == 1:
+                    osiris.pendown()
+                    osiris.circle((thoth_circle_size*thoth_circle_a),360)
+                    osiris.penup()
+        ### Outer Circles
+        if thoth_halo_y == 1:
+            osiris.pensize(thoth_halo_pensize)
+            osiris.color(thoth_halo_color)            
+            for thoth_halo_range in range(1,(thoth_halo_no+1)):
+                thoth_halo_on_off = (randint(0,1))
+                thoth_halo_start_heading = 0
+                for thoth_halo_a in [(-thoth_cell_height,thoth_cell_height),
+                                     (-thoth_cell_height,-thoth_cell_height),
+                                     (thoth_cell_height,-thoth_cell_height),
+                                     (thoth_cell_height,thoth_cell_height)
+                                     ]:
+                    osiris.goto(thoth_halo_a)
+                    osiris.setheading(thoth_halo_start_heading)
+                    osiris.forward(thoth_halo_size*thoth_halo_range)
+                    osiris.right(90)
+                    if thoth_halo_on_off == 1:
+                        osiris.pendown()
+                        osiris.circle(-(thoth_halo_size*thoth_halo_range),90)
+                        osiris.penup()
+                    thoth_halo_start_heading = thoth_halo_start_heading + 90
+        ### RAYS FROM THE CENTRE ###
+        if thoth_ray_y == 1:
+            osiris.pensize(thoth_ray_pensize)
+            osiris.color(thoth_ray_color)            
+            osiris.goto(0,0)
+            osiris.setheading(90)
+            for thoth_ray_range in range(0,(thoth_ray_no+1)):
+                thoth_ray_on_off = (randint(0,1))        
+                for thoth_ray_a in range(1,5):
+                    thoth_C = pythag(thoth_cell_height,(thoth_ray_height
+                                                        *thoth_ray_range))
+                    thoth_M = (work_acos(thoth_cell_height,
+                                         (thoth_ray_height*
+                                          thoth_ray_range),thoth_C))
+                    osiris.left(thoth_M)
+                    if thoth_ray_on_off == 1:
+                        osiris.pendown()
+                        osiris.forward(thoth_C)
+                        osiris.penup()
+                    osiris.goto(0,0)
+                    osiris.left(90-(thoth_M*2)) # We're getting him to turn from the current line to the next liine
+                    if thoth_ray_on_off == 1:
+                        if 1 <= thoth_ray_range <= (thoth_ray_no-1):
+                            osiris.pendown()
+                            osiris.forward(thoth_C)
+                            osiris.penup()
+                            osiris.goto(0,0)
+                    osiris.left(thoth_M)
+        ### RAYS FROM THE CORNER ###
+        if thoth_ray_reverse_y == 1:
+            osiris.pensize(thoth_ray_reverse_pensize)
+            osiris.color(thoth_ray_reverse_color)
+            for thoth_reverse_ray_range in range(0,(thoth_ray_reverse_no+1)):
+                thoth_heading = 0
+                thoth_reverse_ray_on_off = (randint(0,1))   
+                for thoth_x in [(-thoth_cell_height,thoth_cell_height),
+                                (-thoth_cell_height,-thoth_cell_height),
+                                (thoth_cell_height,-thoth_cell_height),
+                                (thoth_cell_height,thoth_cell_height)
+                                ]:
+                    osiris.goto(thoth_x)
+                    osiris.setheading(thoth_heading)           
+                    thoth_Q = pythag(thoth_cell_height,(thoth_ray_reverse_height*
+                                                        thoth_reverse_ray_range))
+                    thoth_P = work_acos(thoth_cell_height,
+                                        (thoth_ray_reverse_height*
+                                         thoth_reverse_ray_range),thoth_Q)
+                    osiris.right(thoth_P)
+                    if thoth_reverse_ray_on_off == 1:
+                        osiris.pendown()
+                        osiris.forward(thoth_Q)
+                        osiris.penup()
+                    osiris.goto(thoth_x)
+                    osiris.right(90-(thoth_P*2))
+                    if thoth_reverse_ray_on_off == 1:
+                        if thoth_reverse_ray_range <= (thoth_ray_reverse_no-1):
+                            osiris.pendown()
+                            osiris.forward(thoth_Q)
+                            osiris.penup()
+                    thoth_heading = thoth_heading + 90
+        ### STRIPE FROM THE CENTRE ###
+        if thoth_stripe_y == 1:
+            osiris.pensize(thoth_stripe_pensize)
+            osiris.color(thoth_stripe_color)
+            osiris.goto(0,0)
+            osiris.setheading(90)
+            for thoth_stripe_range in range(1,(thoth_stripe_no+1)):
+                thoth_stripe_on_off = (randint(0,1))        
+                for thoth_zz in range(1,5):
+                    thoth_D_working = thoth_stripe_height * thoth_stripe_range
+                    thoth_F = pythag(thoth_D_working,thoth_D_working)
+                    osiris.forward(thoth_cell_height-thoth_D_working)
+                    osiris.left(45)
+                    if thoth_stripe_on_off == 1:            
+                        osiris.pendown()
+                        osiris.forward(thoth_F)
+                        osiris.penup()
+                    osiris.goto(0,0)
+                    osiris.left(45)
+                    osiris.forward(thoth_cell_height-thoth_D_working)
+                    osiris.right(45)
+                    if thoth_stripe_on_off == 1:
+                        if thoth_stripe_range <= (thoth_stripe_no-1):
+                            osiris.pendown()
+                            osiris.forward(thoth_F)
+                            osiris.penup()
+                    osiris.goto(0,0)
+                    osiris.left(45)
+        ### STRIPE FROM THE CORNER ###                    
+        if thoth_stripe_reverse_y == 1:
+            osiris.pensize(thoth_stripe_reverse_pensize)
+            osiris.color(thoth_stripe_reverse_color)
+            osiris.goto(0,0)
+            thoth_heading = 180
+            for thoth_stripe_reverse_range in range(1,(thoth_stripe_reverse_no+1)):
+                thoth_stripe_on_off = (randint(0,1))
+                for thoth_z in [(0,thoth_cell_height),
+                                (-thoth_cell_height,0),
+                                (0,-thoth_cell_height),
+                                (thoth_cell_height,0)
+                                ]:
+                    thoth_E_working = (thoth_stripe_reverse_height
+                                       * thoth_stripe_reverse_range)
+                    thoth_R = pythag(thoth_E_working,thoth_E_working)
+                    osiris.goto(thoth_z)
+                    osiris.setheading(thoth_heading)  
+                    osiris.forward(thoth_cell_height-thoth_E_working)
+                    osiris.left(45)
+                    if thoth_stripe_on_off == 1:            
+                        osiris.pendown()
+                        osiris.forward(thoth_R)
+                        osiris.penup()
+                    if thoth_stripe_reverse_range <= (thoth_stripe_reverse_no-1):
+                        osiris.goto(0,0)
+                        osiris.setheading(thoth_heading)  
+                        osiris.forward(thoth_E_working)
+                        osiris.right(135)
+                        if thoth_stripe_on_off == 1:            
+                            osiris.pendown()
+                            osiris.forward(thoth_R)
+                            osiris.penup()            
+                    thoth_heading = thoth_heading + 90
+
 #####################################
 ### Wadjwer = End bounding box    ###
 ### Sea and other lakes           ###
@@ -2169,19 +2622,20 @@ osiris.setheading(90)
 osirisHeadingStart = osiris.heading()
 osiris.goto(0,0)
 
+
 #################
 #GEOMETRIC TILES#
 #################
 
 ### IMHOTEP      ### ISLAMIC-INSPIRED TILE 
-imhotep(imhotep_y = 1,imhotep_width = 400,imhotep_height = 400,
-        imhotep_spike_no = 3,imhotep_row_no = 3,
-        imhotep_row_margin_percent = 10,imhotep_middle_buffer_percent=10,
-        imhotep_row_buffer = 10, imhotep_downward_length=75,
-        imhotep_downward_no=3, imhotep_downward_cols=3,
-        imhotep_row_pensize = 2, imhotep_row_color = '#FF3300',
+imhotep(imhotep_y = 0,imhotep_width = 500,imhotep_height = 500,
+        imhotep_spike_no = 4,imhotep_row_no = 3,
+        imhotep_row_margin_percent = 60,imhotep_middle_buffer_percent=-20,
+        imhotep_row_buffer = -100, imhotep_downward_length=20,
+        imhotep_downward_no=3, imhotep_downward_cols=4,
+        imhotep_row_pensize = 2, imhotep_row_color = '#0033FF',
         imhotep_downward_pensize = 2, imhotep_downward_color = '#0033FF',
-        imhotep_bounding_pensize = 2, imhotep_bounding_color = '#00FF33',
+        imhotep_bounding_pensize = 2, imhotep_bounding_color = '#0033FF',
         imhotep_write_output=1)
                                       
 ### KHEPRI      ### ISOMETRIC RANDOM TILES
@@ -2209,6 +2663,22 @@ bennu(0,300,0,0,0,5,1,'#000000','#000000')
 #####################
 #BASE SHAPES SECTION#
 #####################
+
+thoth(
+    thoth_y=0,thoth_height=500,thoth_ray_no_min = 1,
+    thoth_ray_no_max = 4,thoth_ray_reverse_no_min = 1,
+    thoth_ray_reverse_no_max = 4,thoth_stripe_no_min = 1,
+    thoth_stripe_no_max = 4,thoth_stripe_reverse_no_min = 1,
+    thoth_stripe_reverse_no_max = 4,thoth_halo_no_min = 1,
+    thoth_halo_no_max = 4,thoth_circle_no_min = 1,
+    thoth_circle_no_max = 4, 
+    thoth_ray_pensize = 2,thoth_ray_color = '#990000',
+    thoth_ray_reverse_pensize = 2,thoth_ray_reverse_color = '#990000',
+    thoth_stripe_pensize = 2,thoth_stripe_color = '#990000',
+    thoth_stripe_reverse_pensize = 2,thoth_stripe_reverse_color = '#990000',
+    thoth_halo_pensize = 2,thoth_halo_color = '#990000',
+    thoth_circle_pensize = 2,thoth_circle_color = '#990000' 
+    )
 
 ### AMUN        ### RANDOM SPIKES ###
 ### amun_y,amun_no,amun_angle_a,amun_angle_b,
@@ -2256,28 +2726,28 @@ seth(0,10,0,270,0,30,300,5,100,1,'#1234FF')
 shai                    = 100
 sia                     = shai
 
-for sia_range in range(1,1): 
+for sia_range in range(1,30): 
       
 ### SOPDU       ### INVERTED CRISS CROSS ###
 ### sopdu_y,sopdu_no,sopdu_distance,
 ### sopdu_angle,sopdu_forward,sopdu_increase,
 ### sia_range,sopdu_pensize,sopdu_color
-    sopdu(0,12,50,120,30,10,sia_range,2,'#FF3456')
+    sopdu(1,12,50,120,30,10,sia_range,2,'#FF3456')
 
 ### RA          ### RANDOM CIRCLES ###
 ### ra_y,ra_angle_a,ra_angle_b,ra_circle_a,
 ### ra_circle_b,ra_pensize_a,ra_pensize_b,ra_colour): 
-    ra(0,0,360,120,360,1,4,'#7800FF')
+    ra(1,0,360,120,360,1,4,'#7800FF')
 
 ### SESHAT      ### RANDOM CIRCULAR DASHES - DIFF SIZE ###
 ### seshat_y,seshat_dashes,
 ### seshat_pensize,seshat_color,sia
-    seshat(0,40,2,'#001493',sia)
+    seshat(1,40,2,'#001493',sia)
 
 ### SAFEKH      ### RANDOM CIRCULAR DASHES - SAME SIZE ###
 ### safekh_y,safekh_size,
 ### safekh_pensize,safekh_color,sia
-    safekh(0,80,2,'#001493',sia)
+    safekh(1,80,2,'#001493',sia)
     sia = sia + shai # NO NEED TO CHANGE THIS (EVER)
 ################
 #ROTATE SECTION#
@@ -2294,10 +2764,21 @@ osiris.setheading(90)
 for shu_a in range(shu):
     osiris.penup()             
     osiris.goto(0,0)
-    osiris.forward(75)   
+    osiris.forward(0)   
     osirisHeadingStart = osiris.heading()  
     osirisStartingX = osiris.xcor()
     osirisStartingY = osiris.ycor()
+
+    apedemak(apedemak_y=0,apedemak_start=0,
+             apedemak_span_angle=70,apedemak_spike_inner_angle= 60,
+             apedemak_length = 400,apedemak_spike_no = 5,
+             apedemak_little_spike = 1,apedemak_little_spike_type = 'percentage',
+             apedemak_little_spike_reduction = 0.5,adepemak_slash_space = 0.5,
+             adepemak_slash_extension = 200,adepemak_slash_no = 3,
+             apedemak_spike_pensize = 4,apedemak_spike_color = '#FF4400',
+             apedemak_little_spike_pensize = 3,
+             apedemak_little_spike_color = '#FF4499',
+             apedemak_slash_pensize = 6,apedemak_slash_color = '#4444FF')
 
 ### SERKET        ### CONE WITH CRISS CROSS LINES
     serket(serket_y=0,serket_start=0,serket_angle=20,
@@ -2373,7 +2854,7 @@ for shu_a in range(shu):
 ### hathor_gap,hathor_angle,hathor_length,
 ### hathor_reduction,hathor_indent,hathor_spacing,
 ### hathor_pensize,hathor_color
-    hathor(1,50,0,50,200,8,140,15,15,10,2,'#FF4444')
+    hathor(0,50,0,50,200,8,140,15,15,10,2,'#FF4444')
 
 ### HEDETET     ### CURVEY TWISTED FLAX LINES
 ### hedetet_y,hedetet_start,hedetet_no,hedetet_size,
@@ -2388,15 +2869,6 @@ for shu_a in range(shu):
     kebechet(kebechet_y=0,kebechet_start=125,kebechet_no=16,
              kebechet_distance=150,kebechet_length=200,kebechet_angle=45,
              kebechet_change=-10,kebechet_size=3,kebechet_color='#FF4444')
-
-
-#    kebechet(kebechet_y=1,kebechet_start=50,kebechet_no=12,
-#             kebechet_distance=95,kebechet_length=450,kebechet_angle=45,
-#             kebechet_change=-50,kebechet_size=3,kebechet_color='#FF4444')
-
-    
-    #kebechet(1,50,7,75,100,30,10,2,'#FF4444')##keepme
-    #kebechet(1,50,14,150,200,30,10,2,'#FF4444')##keepme
     
 ### KUK         ### DIAMOND SHAPES GROWS INSIDE
 ### kuk_y,kuk_start,kuk_no,kuk_angle,
