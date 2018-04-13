@@ -57,6 +57,8 @@ There will be more functions developed over time.
 
 <img src="https://raw.githubusercontent.com/osiris77/Python-Turtle---Geometry/master/screenshots/imhotep.jpg">
 
+<hr>
+
 <a href="https://github.com/osiris77/Python-Turtle---Geometry/blob/master/thoth.py">Thoth - Randomised Geometric Tile</a>
 
 <i>Geometric Tiled Pattern</i>
