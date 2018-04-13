@@ -163,8 +163,4 @@ for shu_a in range(shu):
 ##################################
 '''
 	
-### WADJWER     ### END BOUNDING BOX
-### wadjwer_y
-wadjwer(0)
-
 turtle.done()
