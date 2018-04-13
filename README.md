@@ -61,7 +61,7 @@ There will be more functions developed over time.
 
 <i>Geometric Tiled Pattern</i>
 
-<img src="https://raw.githubusercontent.com/osiris77/Python-Turtle---Geometry/master/screenshots/thoth.jpg">
+<img src="https://raw.githubusercontent.com/osiris77/Python-Turtle---Geometry/master/screenshots/thoth.png">
 
 
 
