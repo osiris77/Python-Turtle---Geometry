@@ -20,22 +20,35 @@ There will be more functions developed over time.
 <hr>
 
 Aker - Outward Facing Lines
+<i>Axis/Kaleidoscopic Pattern</i>
 
 <img src="https://raw.githubusercontent.com/osiris77/Python-Turtle---Geometry/master/screenshots/aker.png">
 
+<hr>
+
 Amun - Random Spikes
+<i>Axis/Kaleidoscopic Pattern</i>
 
 <img src="https://raw.githubusercontent.com/osiris77/Python-Turtle---Geometry/master/screenshots/amun.png">
 
+<hr>
+
 Amunet - Diamonds
+<i>Axis/Kaleidoscopic Pattern</i>
 
 <img src="https://raw.githubusercontent.com/osiris77/Python-Turtle---Geometry/master/screenshots/amunet.png">
 
+<hr>
+
 Anhur - Chevrons
+<i>Axis/Kaleidoscopic Pattern</i>
 
 <img src="https://github.com/osiris77/Python-Turtle---Geometry/blob/master/screenshots/anhur.png">
 
+<hr>
+
 Imhotep - Islamic Inspired Tile
+<i>Geometric Tiled Pattern</i>
 
 <img src="https://raw.githubusercontent.com/osiris77/Python-Turtle---Geometry/master/screenshots/imhotep.jpg">
 
