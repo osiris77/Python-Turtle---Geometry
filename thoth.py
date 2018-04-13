@@ -353,12 +353,8 @@ osiris.penup()
 #BASE SHAPES SECTION#
 #####################
 
-for i in range(1200):
-    djet = strftime("%Y-%m-%d %H-%M-%S")
-    thoth()
-    yam()
-    ihy()
-    osiris.clear()
+djet = strftime("%Y-%m-%d %H-%M-%S")
+thoth()
 
 '''
 ##################################
